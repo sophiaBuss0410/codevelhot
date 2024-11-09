@@ -1,6 +1,4 @@
 import streamlit as st
-
-import atexit
 import os
 
 from models.openai_client import OpenAIClient
@@ -8,14 +6,7 @@ from helpers import read_config, encode_image
 
 config = read_config("config.yaml")
 
-st.set_page_config(
-    page_title="CodeVelhot Junction 2024",
-    page_icon="📜",
-    layout= "wide",
-    )
-
 st.title("Multimodal Polis 📈")
-st.sidebar.success("Zero friction: CodeVelhot Junction 2024 ✨  \nChoose a page!")
 
 def generate_response(model): #, use_tools: bool = False):
     if model == "openai":
@@ -29,9 +20,6 @@ def delete_audio_file(audio_filename):
         os.remove(audio_filename)
         print(f"{audio_filename} has been deleted.")
 
-# tab1, tab2 = st.tabs(["📈 Multimodal Polis", "🗃 Data"])
-
-###########################tab1 area from here############################################
 
 col_1, col_2, col_3, col_4 = st.columns(4)
 
@@ -102,3 +90,4 @@ with col2:
     if st.button('Clear Chat'):
         st.session_state.messages = [{"role": "system", "content": config["system_prompt"]}]
         st.rerun()
+
