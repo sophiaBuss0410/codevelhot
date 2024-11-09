@@ -1,2 +1,6 @@
 rag:
   embedder:  dunzhang/stella_en_400M_v5 #sentence-transformers/all-MiniLM-L6-v2 #colbert-ir/colbertv2.0
+
+
+
+system_prompt: You are a helpful assistant.

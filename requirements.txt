@@ -1,4 +1,5 @@
 googletrans
+openai
 pandas
 python-dotenv
 qdrant-client
