@@ -10,54 +10,11 @@ config = read_config("config.yaml")
 
 st.set_page_config(
     page_title="CodeVelhot Junction 2024",
-    page_icon="🚀",
+    page_icon="📜",
     layout= "wide",
     )
 
 st.title("Zero friction: CodeVelhot Junction 2024 ✨")
-
-container = st.container(border=True)
-
-col_1, col_2, col_3, col_4 = st.columns(4)
-
-with col_1:
-    container = st.container(border=True)
-    container.write("Topic 1: This is inside the container")
-
-with col_2:
-    container = st.container(border=True)
-    container.write("Topic 2: This is inside the container")
-
-with col_3:
-    container = st.container(border=True)
-    container.write("Topic 3: This is inside the container")
-
-with col_4:
-    container = st.container(border=True)
-    container.write("Topic 4: This is inside the container")
-
-
-col1, col2 = st.columns(2)
-
-########### Side Bar  ##################
-# use_tools = st.sidebar.checkbox("Enable Function Call")
-model = st.sidebar.radio(
-    "Please choose the AI model.",
-    ["openai"],
-    captions = ["gpt-4o-mini"]
-)
-
-image_path = st.sidebar.file_uploader("Upload Image 🚀", type=["png","jpg","bmp","jpeg"])
-if image_path is not None:
-    image =Image.open(image_path)
-    st.sidebar.image(image_path, caption="Uploaded Image", use_column_width=True)
-
-
-if st.sidebar.button('Clear Chat'):
-    st.session_state.messages = [{"role": "system", "content": config["system_prompt"]}]
-    st.rerun()
-
-############################################    
 
 def generate_response(model): #, use_tools: bool = False):
     if model == "openai":
@@ -70,6 +27,36 @@ def delete_audio_file(audio_filename):
     if os.path.exists(audio_filename):
         os.remove(audio_filename)
         print(f"{audio_filename} has been deleted.")
+
+tab1, tab2 = st.tabs(["📈 Multimodal Polis", "🗃 Data"])
+
+###########################tab1 area from here############################################
+
+with tab1:
+    col_1, col_2, col_3, col_4 = st.columns(4)
+
+    with col_1:
+        container = st.container(border=True, height=180)
+
+        container.write("2_media_the_of_democracy:  \nDemocracy always tries to postpone solving problems until the next election.")
+
+    with col_2:
+        container = st.container(border=True, height=180)
+
+        container.write("4_school_students_education_schools:  \nThe educational material of schools should be implemented on the principle of open source code.")
+
+    with col_3:
+        container = st.container(border=True, height=180)
+
+        container.write("11_society_wellbeing_life_people:  \nPeople lack a hopeful vision of the future.")
+
+    with col_4:
+        container = st.container(border=True, height=180)
+
+        container.write("23_strike_strikes_right_agreements:  \nThe right to strike belongs to Western democracy.")
+
+
+    col1, col2 = st.columns(2)
 
 with col1:
     audio_value = st.audio_input("Record your statement.")
@@ -85,7 +72,7 @@ with col1:
     #     atexit.register(delete_audio_file(audio_filename="recording/recorded_audio.wav"))
 
 with col2:
-    components.iframe("http://localhost:3012/", height=500, scrolling=True)
+    # components.iframe("http://localhost:3012/", height=500, scrolling=True)
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -103,20 +90,7 @@ with col2:
                     st.markdown(message["content"][0]["text"])
 
     if prompt := st.chat_input("write your message here..."):
-        if image_path is not None:
-                base64_image = encode_image(image_path)
-                st.session_state.messages.append({"role": "user", "content": [{
-                    "type": "text",
-                    "text": prompt
-                    },
-                    {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{base64_image}"
-                    }
-                }]})
-        else:
-            st.session_state.messages.append({"role": "user", "content": prompt})
+        st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         with st.chat_message("assistant"):
@@ -124,3 +98,13 @@ with col2:
             response = st.write_stream(stream)
             st.session_state.messages = messages
         st.session_state.messages.append({"role": "assistant", "content": response})
+
+    if st.button('Clear Chat'):
+        st.session_state.messages = [{"role": "system", "content": config["system_prompt"]}]
+        st.rerun()
+
+##########################tab2 area from here###################################################
+import numpy as np
+
+data = np.random.randn(10, 1)
+tab2.line_chart(data)
