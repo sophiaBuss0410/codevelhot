@@ -1,5 +1,9 @@
 rag:
-  embedder:  dunzhang/stella_en_400M_v5 #sentence-transformers/all-MiniLM-L6-v2 #colbert-ir/colbertv2.0
+  embedder:  arkohut/jina-embeddings-v3 #dunzhang/stella_en_400M_v5 #sentence-transformers/all-MiniLM-L6-v2 #colbert-ir/colbertv2.0
+  collection_name: polis-fi
+  score_threshold: 0.5
+  max_search_limit: 20
+  qdrant_timeout: 100
 
 openai:
   model_name: gpt-4o-mini

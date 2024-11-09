@@ -33,3 +33,10 @@ def encode_image(image_file):
 def generator_simulator(content: str):
     for token in content.split(" "):
         yield token + " "
+
+
+def decode_and_reverse_password(encoded_password):
+    decoded_bytes = base64.b64decode(encoded_password)
+    decoded_password = decoded_bytes.decode('utf-8')
+    reversed_password = decoded_password[::-1]
+    return reversed_password
