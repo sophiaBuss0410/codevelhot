@@ -1,4 +1,7 @@
 googletrans
+pandas
+python-dotenv
 qdrant-client
 sentence-transformers
+torch
 tqdm
