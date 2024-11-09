@@ -2,6 +2,7 @@ einops
 googletrans
 openai
 pandas
+plotly
 python-dotenv
 qdrant-client
 sentence-transformers
