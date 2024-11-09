@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
 
     ########## Query Data ##########
-    client = MyQdrantClient(config)
-    query = "Taxes should be more on companies than on individuals."
-    hits = client.get_top_matches_by_query(query)
-    print(client.get_rag_data(hits))
+    # client = MyQdrantClient(config)
+    # query = "Taxes should be more on companies than on individuals."
+    # hits = client.get_top_matches_by_query(query)
+    # print(client.get_rag_data(hits))
