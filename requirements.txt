@@ -1,2 +1,4 @@
 googletrans
 qdrant-client
+sentence-transformers
+tqdm
