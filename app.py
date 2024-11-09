@@ -85,6 +85,8 @@ with col1:
     #     atexit.register(delete_audio_file(audio_filename="recording/recorded_audio.wav"))
 
 with col2:
+    components.iframe("http://localhost:3012/", height=500, scrolling=True)
+
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = [ {"role": "system", "content": config["system_prompt"]}]
