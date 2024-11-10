@@ -60,7 +60,7 @@ with col1:
     #     atexit.register(delete_audio_file(audio_filename="recording/recorded_audio.wav"))
 
 with col2:
-    # components.iframe("http://localhost:3012/", height=500, scrolling=True)
+    model = 'openai'
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -83,8 +83,8 @@ with col2:
             st.markdown(prompt)
         with st.chat_message("assistant"):
             messages, stream = generate_response(model) #, use_tools)
-            response = st.write_stream(stream)
-            st.session_state.messages = messages
+            response = st.write_stream(stream) # writing the stream from openai to the interface
+            st.session_state.messages = messages # storing the chat history
         st.session_state.messages.append({"role": "assistant", "content": response})
 
     if st.button('Clear Chat'):

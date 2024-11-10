@@ -9,6 +9,7 @@ st.set_page_config(
 st.title("Zero Friction powered by CodeVelhot.")
 st.sidebar.success('Solutions to empower digital democracy.')
 
+st.image('pages/background.jpeg')
 # tab1, tab2 = st.tabs(["📈 Multimodal Polis", "🗃 Data"])
 
 st.page_link("pages/Multimodal_Polis.py", label='Start!')
