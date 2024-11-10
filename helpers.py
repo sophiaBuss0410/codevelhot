@@ -1,7 +1,9 @@
-
+from typing import Dict, Any, Optional  
 import yaml
 import json
 import base64
+import re
+
 
 def read_config(config_path =  'config.yaml'):
     with open(config_path, 'r') as file:
@@ -40,3 +42,31 @@ def decode_and_reverse_password(encoded_password):
     decoded_password = decoded_bytes.decode('utf-8')
     reversed_password = decoded_password[::-1]
     return reversed_password
+
+
+@staticmethod
+def extract_json_content(response: str) -> Optional[Dict[str, Any]]:
+    """Extract and parse JSON content from LLM response."""
+    # Try to find content within code blocks first
+    code_block_pattern = r'\`\`\`(?:json|yml)?\n([\s\S]*?)\n?\`\`\`'
+    code_blocks = re.findall(code_block_pattern, response, re.DOTALL)
+    try:
+        if code_blocks:
+            parsed_json = json.loads(code_blocks[0])
+        else:
+            # If no code blocks found, try to parse the entire response as YAML
+            parsed_json = json.loads(response)
+        # If the parsed result is a list, merge all dictionaries in the list
+        if isinstance(parsed_json, list):
+            return parsed_json
+        return parsed_json if isinstance(parsed_json, dict) else None
+
+    except yaml.YAMLError:
+        return None
+
+
+if __name__ == "__main__":
+    content= """```json\n[1, 2, 3]```"""
+    e = extract_json_content(content)
+    print(e)
+    print(type(e))  
