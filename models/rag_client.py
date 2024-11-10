@@ -49,8 +49,8 @@ class MyQdrantClient:
         hits_data = []
         for hit in hits:
             text = hit.payload["Document"]
-            rag_data += f"Opnion_id: {hit.id}. Text: {text} \n"
-            hits_data.append({"hit_id": hit.id, "text": text, "topic": hit.payload["Topic"]})
+            rag_data += f"Opinion_id: {hit.payload['id']}. Text: {text} \n"
+            hits_data.append({"hit_id": hit.payload['id'], "text": text, "topic": hit.payload["Topic"]})
         rag_data += RAG_PROMPT_END
         return {"rag_data": rag_data, "hits": hits_data}
 
@@ -93,7 +93,6 @@ class MyQdrantClient:
         messages = [{"role": "user", "content": rag_data}]
         response = self.open_ai_model.off_generate(messages)
         ranked = extract_json_content(response)
-        print("ranked ids: ", ranked)
         if ranked and type(ranked) == list:
             return ranked
         else:
